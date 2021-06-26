@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="/css/index.css" />
+	</head>
+	<body>
+		<!-- header strony -->
+		<div class="header">
+			<img src="/media/main.jpg" />
+			<!-- Aktulna data i godzina -->
+			<div class="zegar">
+				<div id="data"></div>
+				<div id="zegar"></div>
+			</div>
+		</div>
+
+		<br />
+		<!-- Formularz wyszukiwania -->
+		<div>
+			<form class="container" method="post" action="szukajLotu" id="szukajLotu">
+				<div class="szukajBox">
+					<label for="miejesceWylotu">Miejsce wylotu:</label>
+
+					<select id="miejsceWylotu" required>
+						<option value=""></option>
+						<option value="WAW-sky,Warszawa">Warszawa</option>
+						<option value="WRO-sky,Wroclaw">Wrocław</option>
+						<option value="KAT-sky,Katowice">Katowice</option>
+					</select>
+
+					<div id="prognozaA"></div>
+					<div id="tempA"></div>
+					<div id="pressureA"></div>
+					<div id="windA"></div>
+					<div>
+						<img id="obrazekA" src="" />
+					</div>
+					<div id="weatherA"></div>
+				</div>
+
+				<div class="szukajBox">
+					<label for="miejscePrzylotu">Miejsce docelowe:</label>
+
+					<select id="miejscePrzylotu" required>
+						<option value=""></option>
+						<option value="GDN-sky,Gdansk">Gdańsk</option>
+						<option value="LOND-sky,Londyn">Londyn</option>
+						<option value="CAI-sky,Kair">Kair</option>
+					</select>
+
+					<div id="prognozaB"></div>
+					<div id="tempB"></div>
+					<div id="pressureB"></div>
+					<div id="windB"></div>
+					<div>
+						<img id="obrazekB" src="" />
+					</div>
+					<div id="weatherB"></div>
+				</div>
+
+				<div class="szukajBox">
+					<label for="dataWylotu">Data wylotu:</label>
+
+					<div>
+						<input type="date" id="dataWylotu" required />
+					</div>
+					<div>
+						<input type="submit" value="Szukaj" />
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- kontener z informacją o wyniku szukania -->
+		<div id="wynikSzukania" class="ukryte">
+			<div class="wynikBox">
+				<h3>Wyniki szukania</h3>
+				<p id="wynikInfo"></p>
+				<div id="wynikSzukaniaButtons" class="ukryte">
+					<!-- Przycisk aktywuje przejście do szczegółów lotu -->
+					<button id="szczegoly" onclick="szczegolyLotu()">Szczegóły</button>
+					<!--Przycisk resetujący wyszukiwanie  -->
+					<button id="odNowa" onClick="window.location.reload();">
+						Zacznij od nowa
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- Kontener z wyborem szczegółów lotu -->
+		<div id="szczegolyLotu" class="ukryte">
+			<div class="wynikBox">
+				<h3>Szczegółowe informacje</h3>
+				<form id="szczegolyLotuForm" method="POST" action="">
+					<label for="bagaz">Liczba Pasażerów: </label>
+					<input id="liczbaPasazerow" type="" />
+					<label for="bagaz">Dodatkowy bagaż: </label>
+					<input id="bagaz" type="checkbox" />
+					<input type="submit" value="Potwierdź" />
+				</form>
+				<!-- Kontener z mapą samolotu -->
+				<div>
+					<!-- Otwieranie okna mapy samolotu -->
+					<button id="mapaButton" class="ukryte">Pokaż mapę</button>
+					<!-- Okno mapy samolotu -->
+					<div id="mapa-okno" class="mapa-okno">
+						<!-- Zawartość okna mapy samolotu-->
+						<div class="mapa-zawartosc">
+							<span class="close">&times;</span>
+							<img
+								src=""
+								id="modelSamolotu"
+								alt="mapa miejsc samolotu"
+								class="img"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Przycisk wywołania okna rejestracji / logowania -->
+		<button id="loginButton">zaloguj</button>
+		<!-- Okno rejestracji / logowania -->
+		<div id="login-okno" class="login-okno">
+			<!-- Zawartość okna logowania / rejestracji-->
+			<div class="login-zawartosc">
+				<span class="closeLogin">&times;</span>
+
+				<!-- LOGOWANIE-->
+				<div class="logowanie">
+					<h3>Aby kontynuować musisz się zalogować.</h3>
+					<br />
+					<form id="logowanie">
+						<label></label>
+						<input
+							type="text"
+							name="login"
+							id="login"
+							placeholder="Podaj login..."
+							required
+						/><br />
+						<input
+							type="password"
+							name="password"
+							id="password"
+							placeholder="Podaj hasło..."
+							required
+						/>
+						<input type="submit" value="Zaloguj" />
+					</form>
+					<br /><br />
+					<p>Nie masz konta?</p>
+					<button id="regBtn">Zarejestruj</button>
+				</div>
+				<!-- REJESTRACJA -->
+				<div class="rejestracja">
+					<form method="POST" action="rejestracja" id="rejestracja">
+						<h3>Zarejestruj się</h3>
+						<br />
+						<label>Podaj swoje dane</label><br />
+						<input
+							type="text"
+							name="login"
+							value=""
+							placeholder="Podaj login..."
+							required
+						/><br />
+						<input
+							type="password"
+							name="hasło"
+							value=""
+							placeholder="Podaj hasło..."
+							required
+						/>
+						<input type="submit" value="Wyślij" />
+					</form>
+					<br /><br />
+					<p>Masz już konto?</p>
+					<button id="logBtn">Zaloguj</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="/js/index.js"></script>
+		
+	</body>
+</html>

@@ -1,0 +1,16 @@
+{
+	"users": [
+		{
+			"name":"JohnRambo",
+            "password":"firstblood"
+		},
+		{
+			"name":"RickSanchez",
+            "password":"morty"
+		},
+		{
+			"name":"LaraCroft",
+            "password":"tombrider"
+		}
+	]
+}

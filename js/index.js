@@ -112,11 +112,52 @@ function lotSubmit(event) {
 			// sprawdzanie czy istnieje połączenie i czy jest bezpośrednie (odrzuca jeśli jest więcej niż 1 na potrzeby projektu)
 			if (data.Carriers.length == 0 || data.Quotes[0].Direct == false) {
 				wynikInfo.textContent = 'Brak wyników. Szukaj dalej.'; // brak połączenia
+				document.getElementById('nima').style.display = 'block';
+				document.getElementById('jest').style.display = 'none';
 			} else {
-				wynikInfo.textContent = `Znaleziono połączenie! Przewoźnikiem jest ${data.Carriers[0].Name}, cena biletu wynosi ${data.Quotes[0].MinPrice} $.`; // znaleziono połączenie!
+				// znaleziono połączenie!
+				wynikInfo.textContent = `Znaleziono połączenie!`;
+				wynikInfo2.textContent = `Przewoźnikiem jest ${data.Carriers[0].Name}, cena biletu wynosi ${data.Quotes[0].MinPrice} $.`;
+				//wyświetl kontener z wynikiem szukania
 				document
-					.getElementById('wynikSzukaniaButtons') //wyświetl kontener z wynikiem szukania
+					.getElementById('wynikSzukaniaButtons')
 					.classList.remove('ukryte');
+				document.getElementById('jest').style.display = 'block';
+				document.getElementById('nima').style.display = 'none';
+				// Zmiana widoku wyników zaleznie od ilości wybranych pasażerów + dodaj cenę biletu
+				document.getElementById('szczegolyLotuForm').reset();
+				// Ukryj widok szczegółów
+				document.getElementById('szczegolyLotu').classList.add('ukryte');
+
+				if (document.getElementById('liczbaPasazerow').value == 1) {
+					document.getElementById('cena1').value = data.Quotes[0].MinPrice;
+					document.getElementById('pasazer2').classList.add('ukryte');
+					document.getElementById('pasazer3').classList.add('ukryte');
+					document.getElementById('pasazer4').classList.add('ukryte');
+				} else if (document.getElementById('liczbaPasazerow').value == 2) {
+					document.getElementById('pasazer1').classList.remove('ukryte');
+					document.getElementById('cena1').value = data.Quotes[0].MinPrice;
+					document.getElementById('pasazer2').classList.remove('ukryte');
+					document.getElementById('cena2').value = data.Quotes[0].MinPrice;
+					document.getElementById('pasazer3').classList.add('ukryte');
+					document.getElementById('pasazer4').classList.add('ukryte');
+				} else if (document.getElementById('liczbaPasazerow').value == 3) {
+					document.getElementById('pasazer1').classList.remove('ukryte');
+					document.getElementById('cena1').value = data.Quotes[0].MinPrice;
+					document.getElementById('pasazer2').classList.remove('ukryte');
+					document.getElementById('cena2').value = data.Quotes[0].MinPrice;
+					document.getElementById('pasazer3').classList.remove('ukryte');
+					document.getElementById('cena3').value = data.Quotes[0].MinPrice;
+				} else if (document.getElementById('liczbaPasazerow').value == 4) {
+					document.getElementById('pasazer1').classList.remove('ukryte');
+					document.getElementById('cena1').value = data.Quotes[0].MinPrice;
+					document.getElementById('pasazer2').classList.remove('ukryte');
+					document.getElementById('cena2').value = data.Quotes[0].MinPrice;
+					document.getElementById('pasazer3').classList.remove('ukryte');
+					document.getElementById('cena3').value = data.Quotes[0].MinPrice;
+					document.getElementById('pasazer4').classList.remove('ukryte');
+					document.getElementById('cena4').value = data.Quotes[0].MinPrice;
+				}
 			}
 		})
 		.catch((err) => {
@@ -125,26 +166,58 @@ function lotSubmit(event) {
 	event.preventDefault();
 }
 
+// dodawanie ceny bagażu do biletu
+function dodajBagaz1() {
+	const a = parseInt(document.getElementById('cena1').value);
+	if (document.getElementById('bagaz1').checked) {
+		document.getElementById('cena1').value = a + 5;
+	} else {
+		document.getElementById('cena1').value = a - 5;
+	}
+}
+function dodajBagaz2() {
+	const a = parseInt(document.getElementById('cena2').value);
+	if (document.getElementById('bagaz2').checked) {
+		document.getElementById('cena2').value = a + 5;
+	} else {
+		document.getElementById('cena2').value = a - 5;
+	}
+}
+function dodajBagaz3() {
+	const a = parseInt(document.getElementById('cena3').value);
+	if (document.getElementById('bagaz3').checked) {
+		document.getElementById('cena3').value = a + 5;
+	} else {
+		document.getElementById('cena3').value = a - 5;
+	}
+}
+function dodajBagaz4() {
+	const a = parseInt(document.getElementById('cena4').value);
+	if (document.getElementById('bagaz4').checked) {
+		document.getElementById('cena4').value = a + 5;
+	} else {
+		document.getElementById('cena4').value = a - 5;
+	}
+}
+
 // wyświetlanie szczegółów lotu
 function szczegolyLotu() {
-	// document.getElementById('wynikSzukania').classList.add('ukryte');
+	document.getElementById('wynikSzukania').classList.add('ukryte');
 	document.getElementById('mapaButton').classList.remove('ukryte');
+	document.getElementById('loginButton').classList.remove('ukryte');
 	document.getElementById('szczegolyLotu').classList.remove('ukryte');
-	console.log(lotSubmitData);
-	// document.getElementById('szczegoly_1').textContent = `Start z lotniska "${lotSubmitData.Places[1].Name}" - Lądowanie na lotnisku "${lotSubmitData.Places[0].Name}".`;
-	// document.getElementById('szczegoly_2').textContent = `Przewoźnik: ${lotSubmitData.Carriers[0].Name}.`;
-	// document.getElementById('szczegoly_3').textContent = `Data wylotu: ${lotSubmitData.OutboundDates[0].PartialDate}.`;
 }
 
 // Otwieranie mapy przyciskiem
 document.getElementById('mapaButton').onclick = function () {
+	console.log('obrazek samolotu');
 	document.getElementById('mapa-okno').style.display = 'block';
 	// Sprawdzanie jaki wyświetlić samolot zależnie od odległości lotu
 	if (miejscePrzylotu.value == 'GDN-sky,Gdansk') {
 		document.getElementById('modelSamolotu').src = '/media/Embraer_175.jpg';
 	} else if (miejscePrzylotu.value == 'LOND-sky,Londyn') {
 		document.getElementById('modelSamolotu').src = '/media/Airbus_A350.jpg';
-	} else if (miejscePrzylotu.value == 'CAI-sky,Kair') {
+	} else if (miejscePrzylotu.value == 'TLV-sky,Izrael') {
 		document.getElementById('modelSamolotu').src = '/media/Boeing_747.jpg';
 	} else document.getElementById('modelSamolotu').src = '';
 };
@@ -182,8 +255,30 @@ document.getElementById('logBtn').onclick = function () {
 	document.getElementsByClassName('rejestracja')[0].style.display = 'none';
 };
 
+function podsumowanie() {
+	document.getElementById(
+		'trasa'
+	).textContent = `Start z lotniska "${lotSubmitData.Places[1].Name}" - Lądowanie na lotnisku "${lotSubmitData.Places[0].Name}".`;
+	document.getElementById(
+		'przewoznik'
+	).textContent = `Przewoźnik: ${lotSubmitData.Carriers[0].Name}.`;
+	document.getElementById('dataPod').textContent = `Data wylotu: ${
+		document.getElementById('dataWylotu').value
+	}.`;
+	document.getElementById('pasazerowie').textContent = `Ilość pasażerów: ${
+		document.getElementById('liczbaPasazerow').value
+	}.`;
+	document.getElementById(
+		'koszt'
+	).textContent = `Łączny koszt z ewentualnymi bagażami (+5$) to ${
+		parseInt(document.getElementById('cena1').value) +
+		parseInt(document.getElementById('cena2').value) +
+		parseInt(document.getElementById('cena3').value) +
+		parseInt(document.getElementById('cena4').value)
+	}`;
+}
+
 // LOGOWANIE
-// const users = JSON.parse(users.json);
 // console.log(users)
 const logowanie = document.getElementById('logowanie');
 logowanie.addEventListener('submit', logSubmit);
@@ -197,11 +292,17 @@ function logSubmit(event) {
 			const login = document.getElementById('login');
 			const password = document.getElementById('password');
 			const users = data.users;
+			console.log(data.users);
+			// sprawdzenie czy wpisane dane znajdują się w pliku json
 			users.forEach((entry) => {
 				if (entry.name === login.value && entry.password === password.value) {
-					alert('Pomyślnie zalogowano');
-					document.getElementById('logowanie').reset();
-					document.getElementById('login-okno').style.display = 'none';
+					alert('Pomyślnie zalogowano'); //pomyślne logowanie
+					document.getElementById('logowanie').reset(); //zresetuj okno logowania
+					document.getElementById('login-okno').style.display = 'none'; //schowaj okno logowania
+					document.getElementById('container').style.display = 'none'; //schowaj wyszukiwanie
+					document.getElementById('wynikBox').style.display = 'none';
+					document.getElementById('podsumowanie').style.display = 'flex'; //pokaż okno podsumowania
+					podsumowanie();
 				} else if (
 					entry.name !== login.value &&
 					entry.password === password.value
@@ -218,7 +319,7 @@ function logSubmit(event) {
 			});
 		})
 		.catch((err) => {
-			// Do something for an error here
+			// coś jak error
 		});
 	event.preventDefault();
 }

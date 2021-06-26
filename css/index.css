@@ -28,21 +28,58 @@ img {
 	width: 90%;
 }
 .szukajBox {
-	border: 1px solid skyblue;
+	background-color: rgb(153, 217, 234);
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	flex: auto;
 	margin: 10px;
+	justify-content: center;
 }
 .wynikBox {
-	/* border: 1px solid skyblue; */
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	flex: auto;
+	width: 80%;
+	height: 200px;
+	background-color: rgb(153, 217, 234);
+	border-radius: 10px;
+	margin: 10px auto;
+	justify-content: center;
+}
+.textUp {
+	z-index:1;
+}
+.jest {
+	display: none;
+	position: absolute;
+	max-height: 65%;
+	width: auto;
+	bottom: 5px;
+	left: 5px;
+	z-index:0;
+}
+.nima {
+	display: none;
+	position: absolute;
+	max-height: 65%;
+	width: auto;
+	bottom: 5px;
+	right: 100px;
+	z-index:0;
 }
 .ukryte {
 	display: none;
+}
+.select {
+	width: 150px;
+}
+.miejsceSiedzace {
+	width: 150px;
+}
+.cena {
+	width: 40px;
 }
 
 /*  Okno mapy (tło) */
@@ -137,4 +174,18 @@ img {
 /* formularz rejestracji */
 .rejestracja {
 	display: none;
+}
+
+.podsumowanie {
+	display: none;
+	position: relative;
+	/* display: flex; */
+	flex-direction: column;
+	flex: auto;
+	width: 80%;
+	height: 200px;
+	background-color: rgb(153, 217, 234);
+	border-radius: 10px;
+	margin: 10px auto;
+	justify-content: center;
 }

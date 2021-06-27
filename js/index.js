@@ -270,7 +270,7 @@ function podsumowanie() {
 	}.`;
 	document.getElementById(
 		'koszt'
-	).textContent = `Łączny koszt z ewentualnymi bagażami (+5$) to ${
+	).textContent = `Łączny koszt z ewentualnymi bagażami to ${
 		parseInt(document.getElementById('cena1').value) +
 		parseInt(document.getElementById('cena2').value) +
 		parseInt(document.getElementById('cena3').value) +

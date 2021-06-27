@@ -254,7 +254,7 @@ document.getElementById('logBtn').onclick = function () {
 	document.getElementsByClassName('logowanie')[0].style.display = 'block';
 	document.getElementsByClassName('rejestracja')[0].style.display = 'none';
 };
-
+// PODSUMOWANIE
 function podsumowanie() {
 	document.getElementById(
 		'trasa'

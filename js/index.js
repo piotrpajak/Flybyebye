@@ -214,11 +214,11 @@ document.getElementById('mapaButton').onclick = function () {
 	document.getElementById('mapa-okno').style.display = 'block';
 	// Sprawdzanie jaki wyświetlić samolot zależnie od odległości lotu
 	if (miejscePrzylotu.value == 'GDN-sky,Gdansk') {
-		document.getElementById('modelSamolotu').src = '/media/Embraer_175.jpg';
+		document.getElementById('modelSamolotu').src = './media/Embraer_175.jpg';
 	} else if (miejscePrzylotu.value == 'LOND-sky,Londyn') {
-		document.getElementById('modelSamolotu').src = '/media/Airbus_A350.jpg';
+		document.getElementById('modelSamolotu').src = './media/Airbus_A350.jpg';
 	} else if (miejscePrzylotu.value == 'TLV-sky,Izrael') {
-		document.getElementById('modelSamolotu').src = '/media/Boeing_747.jpg';
+		document.getElementById('modelSamolotu').src = './media/Boeing_747.jpg';
 	} else document.getElementById('modelSamolotu').src = '';
 };
 // Zamykanie mapy X
